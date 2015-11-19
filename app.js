@@ -33,7 +33,7 @@ var startApp = function (err) {
     if (err) {
         console.log(err);
     } else {
-		socket.startSocket({app: app, models: models});
+		//socket.startSocket({app: app, models: models});
         //app.listen(app.get("port"), function () {
 		//	console.log("Express App Started on Port: " + app.get("port"));
 			//socket.startSocket({app: app, models: models});
@@ -52,10 +52,5 @@ async.parallel([
         utils.loadControllers({}, callback);
     },
 ], function (err, results) {
-    async.parallel([
-        function (callback) {
-            utils.sync(app, results, callback);
-			models = results[1];
-        }
-    ], startApp);
+   socket.startSocket({app: app, models: results[1]});
 });
